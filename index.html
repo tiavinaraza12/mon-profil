@@ -3,17 +3,66 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FutureShop - Site Vitrine</title>
+  <title>Mira-Varotra - Site Vitrine</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+    .logo {
+      font-family: 'Pacifico', cursive;
+      color: #ff4081;
+      font-size: 2rem;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+    .modal-content {
+      background-color: #007bff;
+      color: white;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 500px;
+      border-radius: 10px;
+    }
+    .modal-content button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background: #28a745;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .close {
+      float: right;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
   <script>
     function toggleTheme() {
       document.body.classList.toggle('dark');
     }
+    function showModal(index) {
+      document.getElementById('modal' + index).style.display = 'block';
+    }
+    function closeModal(index) {
+      document.getElementById('modal' + index).style.display = 'none';
+    }
   </script>
 </head>
 <body>
-  <header class="navbar">
-    <h1 class="logo">🛍️ FutureShop</h1>
+  <header class="navbar"> 
+    <h1 class="logo">Mira-Varotra</h1>
     <div class="search-container">
       <input type="text" placeholder="Rechercher un produit..." />
       <button>🔍</button>
@@ -30,24 +79,191 @@
   </section>
 
   <main class="products">
-    <!-- Exemple de produit -->
-    <div class="product-card">
-      <img src="https://source.unsplash.com/400x300/?tech,product&sig=1" alt="Produit" />
-      <h3>Produit #1</h3>
-      <p>Description d'un produit futuriste de qualité</p>
-      <button>Ajouter au panier</button>
+  <!-- 10 Produits avec modals -->
+  <!-- Produit 1 -->
+  <div class="product-card">
+    <img src="https://source.unsplash.com/400x300/?tech&sig=0" alt="Produit" />
+    <h3>Produit #1</h3>
+    <p>Description d'un produit futuriste de qualité</p>
+    <button>Acheter</button>
+    <button onclick="showModal(0)">Voir plus</button>
+  </div>
+  <div id="modal0" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal(0)">&times;</span>
+      <h2>Détails du Produit #1</h2>
+      <p><strong>Marque :</strong> FuturTech</p>
+      <p><strong>Prix :</strong> 199 €</p>
+      <p><strong>Détails :</strong> Ce produit est conçu pour une performance optimale dans tous les environnements numériques.</p>
     </div>
-    <div class="product-card">
-      <img src="https://source.unsplash.com/400x300/?gadget&sig=2" alt="Produit" />
-      <h3>Produit #2</h3>
-      <p>Description d'un produit futuriste de qualité</p>
-      <button>Ajouter au panier</button>
+  </div>
+
+  <!-- Produit 2 -->
+  <div class="product-card">
+    <img src="https://source.unsplash.com/400x300/?tech&sig=1" alt="Produit" />
+    <h3>Produit #2</h3>
+    <p>Description d'un produit futuriste de qualité</p>
+    <button>Acheter</button>
+    <button onclick="showModal(1)">Voir plus</button>
+  </div>
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal(1)">&times;</span>
+      <h2>Détails du Produit #2</h2>
+      <p><strong>Marque :</strong> SmartNova</p>
+      <p><strong>Prix :</strong> 249 €</p>
+      <p><strong>Détails :</strong> Compact et puissant, idéal pour une utilisation mobile et connectée.</p>
     </div>
-    <!-- Répéter pour plus de produits -->
-  </main>
+  </div>
+
+  <!-- Produit 3 -->
+  <div class="product-card">
+    <img src="https://source.unsplash.com/400x300/?tech&sig=2" alt="Produit" />
+    <h3>Produit #3</h3>
+    <p>Description d'un produit futuriste de qualité</p>
+    <button>Acheter</button>
+    <button onclick="showModal(2)">Voir plus</button>
+  </div>
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal(2)">&times;</span>
+      <h2>Détails du Produit #3</h2>
+      <p><strong>Marque :</strong> ElectroFutur</p>
+      <p><strong>Prix :</strong> 189 €</p>
+      <p><strong>Détails :</strong> Économe en énergie et design épuré pour s'intégrer à tous les environnements.</p>
+    </div>
+  </div>
+
+  <!-- Produit 4 -->
+  <div class="product-card">
+    <img src="https://source.unsplash.com/400x300/?tech&sig=3" alt="Produit" />
+    <h3>Produit #4</h3>
+    <p>Description d'un produit futuriste de qualité</p>
+    <button>Acheter</button>
+    <button onclick="showModal(3)">Voir plus</button>
+  </div>
+  <div id="modal3" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal(3)">&times;</span>
+      <h2>Détails du Produit #4</h2>
+      <p><strong>Marque :</strong> NovaTech</p>
+      <p><strong>Prix :</strong> 299 €</p>
+      <p><strong>Détails :</strong> Ce modèle offre une connectivité avancée et une interface intuitive.</p>
+    </div>
+  </div>
+
+  <!-- Produit 5 -->
+  <div class="product-card">
+    <img src="https://source.unsplash.com/400x300/?tech&sig=4" alt="Produit" />
+    <h3>Produit #5</h3>
+    <p>Description d'un produit futuriste de qualité</p>
+    <button>Acheter</button>
+    <button onclick="showModal(4)">Voir plus</button>
+  </div>
+  <div id="modal4" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal(4)">&times;</span>
+      <h2>Détails du Produit #5</h2>
+      <p><strong>Marque :</strong> ZetaLabs</p>
+      <p><strong>Prix :</strong> 275 €</p>
+      <p><strong>Détails :</strong> Une solution durable avec des performances de pointe et un design futuriste.</p>
+    </div>
+  </div>
+
+  <!-- Produit 6 à 10 (même modèle réduit pour lisibilité) -->
+  <!-- Produit 6 -->
+  <div class="product-card">
+    <img src="https://source.unsplash.com/400x300/?tech&sig=5" alt="Produit" />
+    <h3>Produit #6</h3>
+    <p>Description d'un produit futuriste de qualité</p>
+    <button>Acheter</button>
+    <button onclick="showModal(5)">Voir plus</button>
+  </div>
+  <div id="modal5" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal(5)">&times;</span>
+      <h2>Détails du Produit #6</h2>
+      <p><strong>Marque :</strong> FuturNova</p>
+      <p><strong>Prix :</strong> 210 €</p>
+      <p><strong>Détails :</strong> Spécialement conçu pour les utilisateurs connectés en permanence.</p>
+    </div>
+  </div>
+
+  <!-- Produit 7 -->
+  <div class="product-card">
+    <img src="https://source.unsplash.com/400x300/?tech&sig=6" alt="Produit" />
+    <h3>Produit #7</h3>
+    <p>Description d'un produit futuriste de qualité</p>
+    <button>Acheter</button>
+    <button onclick="showModal(6)">Voir plus</button>
+  </div>
+  <div id="modal6" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal(6)">&times;</span>
+      <h2>Détails du Produit #7</h2>
+      <p><strong>Marque :</strong> SkyWare</p>
+      <p><strong>Prix :</strong> 325 €</p>
+      <p><strong>Détails :</strong> Un appareil intelligent alliant design, autonomie et rapidité.</p>
+    </div>
+  </div>
+
+  <!-- Produit 8 -->
+  <div class="product-card">
+    <img src="https://source.unsplash.com/400x300/?tech&sig=7" alt="Produit" />
+    <h3>Produit #8</h3>
+    <p>Description d'un produit futuriste de qualité</p>
+    <button>Acheter</button>
+    <button onclick="showModal(7)">Voir plus</button>
+  </div>
+  <div id="modal7" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal(7)">&times;</span>
+      <h2>Détails du Produit #8</h2>
+      <p><strong>Marque :</strong> StarEdge</p>
+      <p><strong>Prix :</strong> 230 €</p>
+      <p><strong>Détails :</strong> Innovant et minimaliste, parfait pour le travail et les loisirs.</p>
+    </div>
+  </div>
+
+  <!-- Produit 9 -->
+  <div class="product-card">
+    <img src="https://source.unsplash.com/400x300/?tech&sig=8" alt="Produit" />
+    <h3>Produit #9</h3>
+    <p>Description d'un produit futuriste de qualité</p>
+    <button>Acheter</button>
+    <button onclick="showModal(8)">Voir plus</button>
+  </div>
+  <div id="modal8" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal(8)">&times;</span>
+      <h2>Détails du Produit #9</h2>
+      <p><strong>Marque :</strong> Cybrix</p>
+      <p><strong>Prix :</strong> 289 €</p>
+      <p><strong>Détails :</strong> Conçu pour une performance graphique et une fluidité impressionnante.</p>
+    </div>
+  </div>
+
+  <!-- Produit 10 -->
+  <div class="product-card">
+    <img src="https://source.unsplash.com/400x300/?tech&sig=9" alt="Produit" />
+    <h3>Produit #10</h3>
+    <p>Description d'un produit futuriste de qualité</p>
+    <button>Acheter</button>
+    <button onclick="showModal(9)">Voir plus</button>
+  </div>
+  <div id="modal9" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal(9)">&times;</span>
+      <h2>Détails du Produit #10</h2>
+      <p><strong>Marque :</strong> OmniTech</p>
+      <p><strong>Prix :</strong> 269 €</p>
+      <p><strong>Détails :</strong> Une solution performante pour les professionnels exigeants.</p>
+    </div>
+  </div>
+</main>
 
   <footer class="footer">
-    © 2025 FutureShop. Tous droits réservés.
+    © 2025 Mira-Varotra. Tous droits réservés.
   </footer>
 </body>
 </html>
