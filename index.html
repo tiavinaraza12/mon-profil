@@ -3,41 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SKET SHOP</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>FutureShop - Site Vitrine</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+    }
+  </script>
 </head>
 <body>
-  <header>
-    <h1>🛍️ SKET SHOP</h1>
-    <p>Explorez nos articles tendance et futuristes</p>
+  <header class="navbar">
+    <h1 class="logo">🛍️ FutureShop</h1>
+    <div class="search-container">
+      <input type="text" placeholder="Rechercher un produit..." />
+      <button>🔍</button>
+    </div>
+    <div class="actions">
+      <button>🛒</button>
+      <button onclick="toggleTheme()">🌓</button>
+    </div>
   </header>
 
-  <section class="products">
-    <div class="product-card">
-      <img src="assets/chaussure1.png" alt="Chaussure futuriste">
-      <h3>Chaussure V1</h3>
-      <p>Prix : 79€</p>
-      <div class="buttons">
-        <button class="buy">Acheter</button>
-        <button class="view">Voir +</button>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="assets/lunette1.png" alt="Lunettes VR">
-      <h3>Lunette VR-X</h3>
-      <p>Prix : 129€</p>
-      <div class="buttons">
-        <button class="buy">Acheter</button>
-        <button class="view">Voir +</button>
-      </div>
-    </div>
-
-    <!-- Ajoute + de produits ici -->
+  <section class="hero">
+    <h2>Bienvenue dans le futur du shopping</h2>
+    <p>Des produits high-tech, un style élégant et une expérience fluide</p>
   </section>
 
-  <footer>
-    <p>© 2025 SKET SHOP - Tous droits réservés</p>
+  <main class="products">
+    <!-- Exemple de produit -->
+    <div class="product-card">
+      <img src="https://source.unsplash.com/400x300/?tech,product&sig=1" alt="Produit" />
+      <h3>Produit #1</h3>
+      <p>Description d'un produit futuriste de qualité</p>
+      <button>Ajouter au panier</button>
+    </div>
+    <div class="product-card">
+      <img src="https://source.unsplash.com/400x300/?gadget&sig=2" alt="Produit" />
+      <h3>Produit #2</h3>
+      <p>Description d'un produit futuriste de qualité</p>
+      <button>Ajouter au panier</button>
+    </div>
+    <!-- Répéter pour plus de produits -->
+  </main>
+
+  <footer class="footer">
+    © 2025 FutureShop. Tous droits réservés.
   </footer>
 </body>
 </html>
