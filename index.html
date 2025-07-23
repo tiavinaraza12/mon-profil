@@ -2,16 +2,147 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mira-Varotra - Site Vitrine</title>
-  <link rel="stylesheet" href="styles.css" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark {
+      background-color: #121212;
+      color: #f1f1f1;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background-color: #fff;
+      transition: background-color 0.3s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    body.dark .navbar {
+      background-color: #1f1f1f;
+      box-shadow: 0 2px 5px rgba(255,255,255,0.1);
+    }
+
     .logo {
       font-family: 'Pacifico', cursive;
+      font-size: 1.8rem;
       color: #ff4081;
-      font-size: 2rem;
+      user-select: none;
     }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .search-container input {
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      outline: none;
+      width: 200px;
+      transition: border-color 0.3s;
+    }
+    body.dark .search-container input {
+      background-color: #333;
+      border-color: #555;
+      color: #eee;
+    }
+    .search-container button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      background: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .search-container button:hover {
+      background: #0056b3;
+    }
+
+    .actions button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin-left: 0.5rem;
+      color: inherit;
+      transition: color 0.3s;
+    }
+    .actions button:hover {
+      color: #ff4081;
+    }
+
+    .hero {
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      padding: 1rem 2rem 3rem;
+    }
+    .product {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 1rem;
+      transition: transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      user-select: none;
+    }
+    body.dark .product {
+      background-color: #1e1e1e;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    }
+    .product:hover {
+      transform: translateY(-5px);
+    }
+    .product h3 {
+      margin-bottom: 0.5rem;
+      color: #ff4081;
+    }
+    .product p {
+      flex-grow: 1;
+      margin-bottom: 1rem;
+      color: inherit;
+    }
+    .product button {
+      padding: 0.5rem;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 0.25rem;
+      transition: background 0.3s;
+      width: 100%;
+      font-weight: 600;
+    }
+    .product button:hover {
+      background: #0056b3;
+    }
+
     .modal {
       display: none;
       position: fixed;
@@ -28,10 +159,9 @@
       color: white;
       margin: 10% auto;
       padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-      max-width: 500px;
       border-radius: 10px;
+      max-width: 500px;
+      position: relative;
     }
     .modal-content button {
       margin-top: 1rem;
@@ -41,22 +171,84 @@
       color: white;
       border-radius: 6px;
       cursor: pointer;
+      width: 100%;
+      font-weight: 600;
     }
     .close {
-      float: right;
-      font-size: 20px;
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      font-weight: bold;
       cursor: pointer;
+      user-select: none;
+    }
+
+    #cart-notification {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #28a745;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: none;
+      z-index: 20000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      user-select: none;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      background-color: #f4f4f4;
+      color: #555;
+      user-select: none;
+    }
+    body.dark .footer {
+      background-color: #1f1f1f;
+      color: #bbb;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .search-container {
+        width: 100%;
+      }
+      .search-container input {
+        width: 100%;
+      }
+      .actions {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .products {
+        padding: 1rem;
+      }
     }
   </style>
   <script>
     function toggleTheme() {
       document.body.classList.toggle('dark');
     }
+
     function showModal(index) {
       document.getElementById('modal' + index).style.display = 'block';
     }
     function closeModal(index) {
       document.getElementById('modal' + index).style.display = 'none';
+    }
+    function addToCart(productId) {
+      const notif = document.getElementById('cart-notification');
+      notif.innerText = 'Produit #' + (productId + 1) + ' ajouté au panier !';
+      notif.style.display = 'block';
+      setTimeout(() => notif.style.display = 'none', 3000);
     }
   </script>
 </head>
@@ -68,8 +260,8 @@
       <button>🔍</button>
     </div>
     <div class="actions">
-      <button>🛒</button>
-      <button onclick="toggleTheme()">🌓</button>
+      <button title="Panier">🛒</button>
+      <button title="Changer thème" onclick="toggleTheme()">🌓</button>
     </div>
   </header>
 
@@ -78,189 +270,99 @@
     <p>Des produits high-tech, un style élégant et une expérience fluide</p>
   </section>
 
-  <main class="products">
-  <!-- 10 Produits avec modals -->
-  <!-- Produit 1 -->
-  <div class="product-card">
-    <img src="https://source.unsplash.com/400x300/?tech&sig=0" alt="Produit" />
-    <h3>Produit #1</h3>
-    <p>Description d'un produit futuriste de qualité</p>
-    <button>Acheter</button>
-    <button onclick="showModal(0)">Voir plus</button>
-  </div>
-  <div id="modal0" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal(0)">&times;</span>
-      <h2>Détails du Produit #1</h2>
-      <p><strong>Marque :</strong> FuturTech</p>
-      <p><strong>Prix :</strong> 199 €</p>
-      <p><strong>Détails :</strong> Ce produit est conçu pour une performance optimale dans tous les environnements numériques.</p>
-    </div>
-  </div>
+  <div id="cart-notification"></div>
 
-  <!-- Produit 2 -->
-  <div class="product-card">
-    <img src="https://source.unsplash.com/400x300/?tech&sig=1" alt="Produit" />
-    <h3>Produit #2</h3>
-    <p>Description d'un produit futuriste de qualité</p>
-    <button>Acheter</button>
-    <button onclick="showModal(1)">Voir plus</button>
-  </div>
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal(1)">&times;</span>
-      <h2>Détails du Produit #2</h2>
-      <p><strong>Marque :</strong> SmartNova</p>
-      <p><strong>Prix :</strong> 249 €</p>
-      <p><strong>Détails :</strong> Compact et puissant, idéal pour une utilisation mobile et connectée.</p>
+  <section class="products">
+    <!-- Produit 1 -->
+    <div class="product">
+      <h3>Smartphone X1</h3>
+      <p>Un téléphone puissant avec une grande autonomie.</p>
+      <button onclick="showModal(0)">Voir plus</button>
+      <button onclick="addToCart(0)">Ajouter au panier</button>
     </div>
-  </div>
+    <div id="modal0" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal(0)">&times;</span>
+        <h3>Smartphone X1</h3>
+        <p><strong>Marque :</strong> TechBrand</p>
+        <p><strong>Prix :</strong> 299.000Ar</p>
+        <p><strong>Détails :</strong> Écran AMOLED, 128Go, Caméra 64MP</p>
+        <button onclick="addToCart(0)">Ajouter au panier</button>
+      </div>
+    </div>
 
-  <!-- Produit 3 -->
-  <div class="product-card">
-    <img src="https://source.unsplash.com/400x300/?tech&sig=2" alt="Produit" />
-    <h3>Produit #3</h3>
-    <p>Description d'un produit futuriste de qualité</p>
-    <button>Acheter</button>
-    <button onclick="showModal(2)">Voir plus</button>
-  </div>
-  <div id="modal2" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal(2)">&times;</span>
-      <h2>Détails du Produit #3</h2>
-      <p><strong>Marque :</strong> ElectroFutur</p>
-      <p><strong>Prix :</strong> 189 €</p>
-      <p><strong>Détails :</strong> Économe en énergie et design épuré pour s'intégrer à tous les environnements.</p>
+    <!-- Produit 2 -->
+    <div class="product">
+      <h3>Ordinateur Port. Z5</h3>
+      <p>Léger, rapide, parfait pour les pros.</p>
+      <button onclick="showModal(1)">Voir plus</button>
+      <button onclick="addToCart(1)">Ajouter au panier</button>
     </div>
-  </div>
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal(1)">&times;</span>
+        <h3>Ordinateur Z5</h3>
+        <p><strong>Marque :</strong> SpeedComp</p>
+        <p><strong>Prix :</strong> 699.000Ar</p>
+        <p><strong>Détails :</strong> i7, 16Go RAM, SSD 512Go</p>
+        <button onclick="addToCart(1)">Ajouter au panier</button>
+      </div>
+    </div>
 
-  <!-- Produit 4 -->
-  <div class="product-card">
-    <img src="https://source.unsplash.com/400x300/?tech&sig=3" alt="Produit" />
-    <h3>Produit #4</h3>
-    <p>Description d'un produit futuriste de qualité</p>
-    <button>Acheter</button>
-    <button onclick="showModal(3)">Voir plus</button>
-  </div>
-  <div id="modal3" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal(3)">&times;</span>
-      <h2>Détails du Produit #4</h2>
-      <p><strong>Marque :</strong> NovaTech</p>
-      <p><strong>Prix :</strong> 299 €</p>
-      <p><strong>Détails :</strong> Ce modèle offre une connectivité avancée et une interface intuitive.</p>
+    <!-- Produit 3 -->
+    <div class="product">
+      <h3>Montre Connectée S3</h3>
+      <p>Suivi de santé, notifications et autonomie 7j.</p>
+      <button onclick="showModal(2)">Voir plus</button>
+      <button onclick="addToCart(2)">Ajouter au panier</button>
     </div>
-  </div>
+    <div id="modal2" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal(2)">&times;</span>
+        <h3>Montre S3</h3>
+        <p><strong>Marque :</strong> SmartGear</p>
+        <p><strong>Prix :</strong> 129.000Ar</p>
+        <p><strong>Détails :</strong> Waterproof, ECG, Bluetooth 5.0</p>
+        <button onclick="addToCart(2)">Ajouter au panier</button>
+      </div>
+    </div>
 
-  <!-- Produit 5 -->
-  <div class="product-card">
-    <img src="https://source.unsplash.com/400x300/?tech&sig=4" alt="Produit" />
-    <h3>Produit #5</h3>
-    <p>Description d'un produit futuriste de qualité</p>
-    <button>Acheter</button>
-    <button onclick="showModal(4)">Voir plus</button>
-  </div>
-  <div id="modal4" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal(4)">&times;</span>
-      <h2>Détails du Produit #5</h2>
-      <p><strong>Marque :</strong> ZetaLabs</p>
-      <p><strong>Prix :</strong> 275 €</p>
-      <p><strong>Détails :</strong> Une solution durable avec des performances de pointe et un design futuriste.</p>
+    <!-- Produit 4 -->
+    <div class="product">
+      <h3>Écouteurs TWS Pro</h3>
+      <p>Son immersif et réduction de bruit active.</p>
+      <button onclick="showModal(3)">Voir plus</button>
+      <button onclick="addToCart(3)">Ajouter au panier</button>
     </div>
-  </div>
+    <div id="modal3" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal(3)">&times;</span>
+        <h3>Écouteurs TWS Pro</h3>
+        <p><strong>Marque :</strong> AudioPlus</p>
+        <p><strong>Prix :</strong> 40.000Ar</p>
+        <p><strong>Détails :</strong> Autonomie 30h, boîtier recharge rapide</p>
+        <button onclick="addToCart(3)">Ajouter au panier</button>
+      </div>
+    </div>
 
-  <!-- Produit 6 à 10 (même modèle réduit pour lisibilité) -->
-  <!-- Produit 6 -->
-  <div class="product-card">
-    <img src="https://source.unsplash.com/400x300/?tech&sig=5" alt="Produit" />
-    <h3>Produit #6</h3>
-    <p>Description d'un produit futuriste de qualité</p>
-    <button>Acheter</button>
-    <button onclick="showModal(5)">Voir plus</button>
-  </div>
-  <div id="modal5" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal(5)">&times;</span>
-      <h2>Détails du Produit #6</h2>
-      <p><strong>Marque :</strong> FuturNova</p>
-      <p><strong>Prix :</strong> 210 €</p>
-      <p><strong>Détails :</strong> Spécialement conçu pour les utilisateurs connectés en permanence.</p>
+    <!-- Produit 5 -->
+    <div class="product">
+      <h3>Caméra HD Wifi</h3>
+      <p>Sécurité domestique avec vision nocturne.</p>
+      <button onclick="showModal(4)">Voir plus</button>
+      <button onclick="addToCart(4)">Ajouter au panier</button>
     </div>
-  </div>
-
-  <!-- Produit 7 -->
-  <div class="product-card">
-    <img src="https://source.unsplash.com/400x300/?tech&sig=6" alt="Produit" />
-    <h3>Produit #7</h3>
-    <p>Description d'un produit futuriste de qualité</p>
-    <button>Acheter</button>
-    <button onclick="showModal(6)">Voir plus</button>
-  </div>
-  <div id="modal6" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal(6)">&times;</span>
-      <h2>Détails du Produit #7</h2>
-      <p><strong>Marque :</strong> SkyWare</p>
-      <p><strong>Prix :</strong> 325 €</p>
-      <p><strong>Détails :</strong> Un appareil intelligent alliant design, autonomie et rapidité.</p>
+    <div id="modal4" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal(4)">&times;</span>
+        <h3>Caméra HD Wifi</h3>
+        <p><strong>Marque :</strong> HomeSecure</p>
+        <p><strong>Prix :</strong> 500.000Ar</p>
+        <p><strong>Détails :</strong> 1080p, détection mouvement, application mobile</p>
+        <button onclick="addToCart(4)">Ajouter au panier</button>
+      </div>
     </div>
-  </div>
-
-  <!-- Produit 8 -->
-  <div class="product-card">
-    <img src="https://source.unsplash.com/400x300/?tech&sig=7" alt="Produit" />
-    <h3>Produit #8</h3>
-    <p>Description d'un produit futuriste de qualité</p>
-    <button>Acheter</button>
-    <button onclick="showModal(7)">Voir plus</button>
-  </div>
-  <div id="modal7" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal(7)">&times;</span>
-      <h2>Détails du Produit #8</h2>
-      <p><strong>Marque :</strong> StarEdge</p>
-      <p><strong>Prix :</strong> 230 €</p>
-      <p><strong>Détails :</strong> Innovant et minimaliste, parfait pour le travail et les loisirs.</p>
-    </div>
-  </div>
-
-  <!-- Produit 9 -->
-  <div class="product-card">
-    <img src="https://source.unsplash.com/400x300/?tech&sig=8" alt="Produit" />
-    <h3>Produit #9</h3>
-    <p>Description d'un produit futuriste de qualité</p>
-    <button>Acheter</button>
-    <button onclick="showModal(8)">Voir plus</button>
-  </div>
-  <div id="modal8" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal(8)">&times;</span>
-      <h2>Détails du Produit #9</h2>
-      <p><strong>Marque :</strong> Cybrix</p>
-      <p><strong>Prix :</strong> 289 €</p>
-      <p><strong>Détails :</strong> Conçu pour une performance graphique et une fluidité impressionnante.</p>
-    </div>
-  </div>
-
-  <!-- Produit 10 -->
-  <div class="product-card">
-    <img src="https://source.unsplash.com/400x300/?tech&sig=9" alt="Produit" />
-    <h3>Produit #10</h3>
-    <p>Description d'un produit futuriste de qualité</p>
-    <button>Acheter</button>
-    <button onclick="showModal(9)">Voir plus</button>
-  </div>
-  <div id="modal9" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal(9)">&times;</span>
-      <h2>Détails du Produit #10</h2>
-      <p><strong>Marque :</strong> OmniTech</p>
-      <p><strong>Prix :</strong> 269 €</p>
-      <p><strong>Détails :</strong> Une solution performante pour les professionnels exigeants.</p>
-    </div>
-  </div>
-</main>
+  </section>
 
   <footer class="footer">
     © 2025 Mira-Varotra. Tous droits réservés.
